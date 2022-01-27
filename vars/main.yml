@@ -1,0 +1,2 @@
+---
+gotify_bin_url: https://github.com/gotify/server/releases/download/v{{ gotify_version }}/gotify-linux-amd64.zip

@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: pmoscode.gotify
+#    - role: gotify
+      vars:
+        gotify_admin_password: secret
