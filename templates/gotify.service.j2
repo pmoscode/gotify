@@ -1,0 +1,24 @@
+[Unit]
+Description=Gotify
+Requires=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=30sec
+ExecStart={{ gotify_install_dir }}/gotify-linux-amd64
+KillSignal=SIGTERM
+
+# Stop trying to restart the service if it restarts too many times in a row
+StartLimitInterval=5min
+StartLimitBurst=4
+
+StandardOutput=append:{{ gotify_install_dir }}/gotify.log
+StandardError=inherit
+StandardInput=null
+
+User={{ gotify_user }}
+Group={{ gotify_user_group }}
+
+[Install]
+WantedBy=multi-user.target

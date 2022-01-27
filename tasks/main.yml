@@ -1,0 +1,62 @@
+---
+- name: Fail if port > 1024
+  fail:
+    msg: Port < 1024 not supported for now due to systemd service
+  when: gotify_server_port < 1024
+
+- name: "Ensure '{{ gotify_user_group }}' group exists"
+  group:
+    name: "{{ gotify_user_group }}"
+    state: present
+
+- name: "Ensure '{{ gotify_user }}' user exists"
+  user:
+    name: "{{ gotify_user }}"
+    shell: "/usr/sbin/nologin"
+    group: "{{ gotify_user_group }}"
+    state: present
+
+- name: Install unzip
+  apt:
+    name: unzip
+    update_cache: yes
+    state: present
+
+- name: Download gotify server
+  get_url:
+    url: "{{ gotify_bin_url }}"
+    dest: /tmp
+
+- name: "Create gotify install folder '{{ gotify_install_dir }}'"
+  file:
+    path: "{{ gotify_install_dir }}"
+    state: directory
+    owner: "{{ gotify_user }}"
+    group: "{{ gotify_user_group }}"
+    mode: 0644
+
+- name: Unzip file
+  unarchive:
+    src: /tmp/gotify-linux-amd64.zip
+    dest: "{{ gotify_install_dir }}"
+    remote_src: yes
+    owner: "{{ gotify_user }}"
+    group: "{{ gotify_user_group }}"
+    mode: +x
+
+- name: "Copy config to '{{ gotify_install_dir }}' and gotify.service to systemd services folder"
+  template:
+    src: "{{ item.source }}"
+    dest: "{{ item.target }}"
+    mode: "{{ item.mode }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+  loop:
+    - { source: "config.j2", target: "{{ gotify_install_dir }}/config.yml", mode: "0655", owner: "{{ gotify_user }}", group: "{{ gotify_user_group }}" }
+    - { source: "gotify.service.j2", target: "/etc/systemd/system/gotify.service", mode: "0644", owner: "root", group: "root" }
+
+- name: Start gotify systemd service
+  systemd:
+    name: gotify
+    daemon_reload: true
+    state: started

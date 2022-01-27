@@ -1,0 +1,11 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: Test if gotify server file exists
+    stat:
+      path: "/opt/gotify/gotify-linux-amd64"
+    register: file_stat
+    failed_when: not file_stat.stat.exists

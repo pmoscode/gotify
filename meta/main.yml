@@ -1,0 +1,32 @@
+galaxy_info:
+  role_name: gotify
+  namespace: pmoscode
+
+  author: pmoscode
+  description: Role which installs Gotify as a message broker like PushBullet.
+
+  license: MIT
+
+  min_ansible_version: 2.1
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - bionic
+
+    - name: Debian
+      versions:
+        - bullseye
+        - buster
+
+  galaxy_tags:
+    - ubuntu
+    - debian
+    - gotify
+    - message
+    - broker
+    - subscribe
+    - push
+
+dependencies: []
