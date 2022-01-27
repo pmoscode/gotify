@@ -53,7 +53,7 @@
     group: "{{ item.group }}"
   loop:
     - { source: "config.j2", target: "{{ gotify_install_dir }}/config.yml", mode: "0655", owner: "{{ gotify_user }}", group: "{{ gotify_user_group }}" }
-    - { source: "gotify.service.j2", target: "/etc/systemd/system/endlessh.service", mode: "0644", owner: "root", group: "root" }
+    - { source: "gotify.service.j2", target: "/etc/systemd/system/gotify.service", mode: "0644", owner: "root", group: "root" }
 
 - name: Start gotify systemd service
   systemd:
