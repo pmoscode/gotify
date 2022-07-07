@@ -1,7 +1,7 @@
 ---
-- name: Fail if port > 1024
+- name: Fail if port < 1024
   fail:
-    msg: Port < 1024 not supported for now due to systemd service
+    msg: Port < 1024 not supported for now due to systemd service limitations
   when: gotify_server_port < 1024
 
 - name: "Ensure '{{ gotify_user_group }}' group exists"
@@ -59,4 +59,5 @@
   systemd:
     name: gotify
     daemon_reload: true
+    enabled: yes
     state: started
