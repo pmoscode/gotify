@@ -16,17 +16,20 @@ No requirements.
 Role Variables
 --------------
 
-| Parameter                  | Default           | Description                                                               |
-|----------------------------|-------------------|---------------------------------------------------------------------------|
-| gotify_version             | 2.1.4             | The Gotify version to install (https://github.com/gotify/server/releases) |
-| gotify_server_port         | 8080              | The server port Gotify is listening on. For now, must be > 1024           |
-| gotify_admin_password      | random (25 chars) | The default admin user                                                    |
-| gotify_admin_usename       | admin             | The admin password                                                        |
-| gotify_password_strength   | 10                | The min. password length                                                  |
-| gotify_enable_registration | false             | Should user registration be enabled?                                      |
-| gotify_install_dir         | /opt/gotify       | Where to install Gotify                                                   |
-| gotify_user                | gotify            | System user for Gotify server                                             |
-| gotify_user_group          | gotify            | Group for system user ^^                                                  |
+| Parameter                  | Default            | Description                                                               |
+|----------------------------|--------------------|---------------------------------------------------------------------------|
+| gotify_version             | 2.1.4              | The Gotify version to install (https://github.com/gotify/server/releases) |
+| gotify_server_port         | 8080               | The server port Gotify is listening on. For now, must be > 1024           |
+| gotify_admin_password      | random (25 chars)  | The default admin user                                                    |
+| gotify_admin_usename       | admin              | The admin password                                                        |
+| gotify_password_strength   | 10                 | The min. password length                                                  |
+| gotify_enable_registration | false              | Should user registration be enabled?                                      |
+| gotify_install_dir         | /opt/gotify        | Where to install Gotify                                                   |
+| gotify_user                | gotify             | System user for Gotify server                                             |
+| gotify_user_group          | gotify             | Group for system user ^^                                                  |
+| gotify_bind_address        | <empty>            | The address to bind on (defaults to all)                                  |
+| gotify_uploaded_images_dir | data/images        | The directory, where images are stored                                    |
+| gotify_plugins_dir         | gotify_plugins_dir | The directory, where plugin resides                                       |
 
 The admin password is saved in the config file. So, if you haven't set your own, you will have to log in to the target machine and get it there.
 

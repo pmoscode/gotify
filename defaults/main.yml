@@ -8,3 +8,6 @@ gotify_enable_registration: false
 gotify_install_dir: /opt/gotify
 gotify_user: gotify
 gotify_user_group: gotify
+gotify_bind_address: ""
+gotify_uploaded_images_dir: data/images
+gotify_plugins_dir: data/plugins

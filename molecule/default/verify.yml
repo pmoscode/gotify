@@ -7,5 +7,17 @@
   - name: Test if gotify server file exists
     stat:
       path: "/opt/gotify/gotify-linux-amd64"
-    register: file_stat
-    failed_when: not file_stat.stat.exists
+    register: file_stat_bin
+    failed_when: not file_stat_bin.stat.exists
+
+- name: Test if systemd startup file exists
+    stat:
+      path: "/etc/systemd/system/gotify.service"
+    register: file_stat_systemd
+    failed_when: not file_stat_systemd.stat.exists
+
+- name: Test if gotify config file exists
+    stat:
+      path: "/opt/gotify/config.yml"
+    register: file_stat_config
+    failed_when: not file_stat_config.stat.exists
